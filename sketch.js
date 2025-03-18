@@ -1,9 +1,11 @@
 let video;
 let hands;
 let drawing = [];
-let brushColors = ['red', 'green']; // Couleurs fixes pour chaque main
-let brushSize = 40; // Épaisseur des traits
-let lastPositions = [null, null]; // Tableau pour stocker les dernières positions des doigts pour chaque main
+let brushColors = ['red', 'green'];
+let brushSize = 40;
+let lastPositions = [null, null];
+
+
 let gallery = document.getElementById('gallery');
 let modal = document.getElementById('modal');
 let modalImage = document.getElementById('modalImage');
@@ -13,16 +15,19 @@ let nextButton = document.getElementById('nextButton');
 let currentIndex = 0;
 let images = [];
 let timer;
-let timeLeft = 15; // Temps en secondes pour la partie
-let countdown = 5; // Temps en secondes pour le décompte avant le début de la partie
-let winnerDisplay = document.getElementById('winnerDisplay'); // Conteneur pour afficher le gagnant
-let timerDisplay = document.getElementById('timer'); // Conteneur pour afficher le minuteur
-let winnerModal = document.getElementById('winnerModal'); // Fenêtre modale pour afficher le gagnant
+let timeLeft = 15;
+let countdown = 5; 
+let winnerDisplay = document.getElementById('winnerDisplay'); 
+let timerDisplay = document.getElementById('timer');
+let winnerModal = document.getElementById('winnerModal');
 let closeWinnerModal = document.getElementsByClassName('closeWinner')[0];
 let winnerTitle = document.getElementById('winnerTitle');
 let winnerText = document.getElementById('winnerText');
 let winnerScores = document.getElementById('winnerScores');
-let restartGameButton = document.getElementById('restartGameButton'); // Bouton pour recommencer
+const restartGameButton = document.getElementById('restartGameButton'); 
+
+
+
 
 function setup() {
     createCanvas(860, 640);
@@ -51,7 +56,7 @@ function setup() {
     document.getElementById('clearButton').addEventListener('click', clearDrawing);
     document.getElementById('screenshotButton').addEventListener('click', takeScreenshot);
     document.getElementById('restartButton').addEventListener('click', restartGame);
-    restartGameButton.addEventListener('click', restartGame); // Ajouter un écouteur pour le bouton recommencer
+    restartGameButton.addEventListener('click', restartGame);
 
     closeModal.onclick = function() {
         modal.style.display = 'none';
@@ -69,7 +74,6 @@ function setup() {
         changeImage(1);
     }
 
-    // Démarrer le décompte avant de commencer le minuteur
     startCountdown();
 }
 
@@ -77,7 +81,7 @@ function gotHands(results) {
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         for (let i = 0; i < results.multiHandLandmarks.length; i++) {
             let hand = results.multiHandLandmarks[i];
-            let indexFinger = hand[8]; // Utiliser l'index pour chaque main
+            let indexFinger = hand[8];
             let x = indexFinger.x * width;
             let y = indexFinger.y * height;
 
@@ -106,7 +110,7 @@ function draw() {
 function clearDrawing() {
     drawing = [];
     updateColorPercentages();
-    winnerDisplay.innerText = ''; // Réinitialiser l'affichage du gagnant
+    winnerDisplay.innerText = '';
 }
 
 function takeScreenshot() {
@@ -172,7 +176,7 @@ function startCountdown() {
         if (countdown <= 0) {
             clearInterval(countdownTimer);
             document.body.removeChild(countdownOverlay);
-            startTimer(); // Démarrer le minuteur de la partie
+            startTimer();
             clearDrawing();
         }
     }, 1000);
@@ -181,15 +185,15 @@ function startCountdown() {
 
 
 function startTimer() {
-    timeLeft = 15; // 15 secondes
+    timeLeft = 15;
     timer = setInterval(() => {
         timeLeft--;
-        timerDisplay.innerText = `Temps restant: ${timeLeft}s`; // Mettre à jour le contenu de la div du minuteur
+        timerDisplay.innerText = `Temps restant: ${timeLeft}s`;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            takeScreenshot(); // Prendre un screenshot à la fin du temps
-            determineWinner(); // Déterminer et afficher le gagnant
-            clearDrawing(); // Effacer le dessin
+            takeScreenshot();
+            determineWinner();
+            clearDrawing();
         }
     }, 1000);
 }
@@ -222,13 +226,13 @@ function determineWinner() {
         winnerScores.appendChild(div);
     }
 
-    winnerModal.style.display = 'block'; // Afficher la fenêtre modale du gagnant
+    winnerModal.style.display = 'block';
 }
 
 function restartGame() {
     clearInterval(timer);
     countdown = 5;
     startCountdown();
-    clearDrawing(); // Effacer le dessin
-    winnerModal.style.display = 'none'; // Fermer la fenêtre modale du gagnant
+    clearDrawing();
+    winnerModal.style.display = 'none';
 }
