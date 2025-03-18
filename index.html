@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graffiti Air Painter</title>
+    <title>Splatoon and More</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,12 +13,11 @@
     <button id="clearButton">Effacer le dessin</button>
     <button id="screenshotButton">Prendre un screenshot</button>
     <button id="restartButton">Recommencer</button>
-    <div id="colorPercentages"></div> <!-- Conteneur pour afficher les pourcentages de couleurs -->
+    <div id="colorPercentages"></div>
     <video id="video" autoplay></video>
-    <div class="timer" id="timer"></div> <!-- Conteneur pour afficher le minuteur -->
+    <div class="timer" id="timer"></div>
     <div id="gallery"></div>
 
-    <!-- Fenêtre modale pour afficher les images en plus grand -->
     <div id="modal" class="modal">
         <span class="close">&times;</span>
         <span class="prev" id="prevButton">&#10094;</span>
@@ -26,20 +25,17 @@
         <span class="next" id="nextButton">&#10095;</span>
     </div>
 
-        <!-- Popup de décompte -->
     <div id="countdownPopup">
         <div class="countdown-content" id="countdownDisplay">5</div>
     </div>
 
-
-    <!-- Fenêtre modale pour afficher le gagnant -->
     <div id="winnerModal" class="modal">
         <div class="modal-content">
             <span class="closeWinner">&times;</span>
             <h2 id="winnerTitle">Gagnant</h2>
             <p id="winnerText"></p>
             <div id="winnerScores"></div>
-            <button id="restartGameButton">Recommencer</button> <!-- Bouton pour recommencer -->
+            <button id="restartGameButton">Recommencer</button>
         </div>
     </div>
 
