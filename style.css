@@ -1,94 +1,102 @@
 body {
     text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #222;
-    color: white;
-}
-
-canvas {
-    border: 2px solid white;
-    display: block;
-    margin: auto;
-    transform: rotateY(180deg);
+    font-family: 'Poppins', sans-serif;
+    background-color: #1E1E2E;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
 video {
     display: none;
 }
 
-#colorPercentages {
+h1 {
+    font-size: 2.5em;
     margin-top: 20px;
-    font-size: 18px;
+    color: #FFD700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
 }
 
-#winnerDisplay {
-    margin-top: 20px;
-    font-size: 24px;
+p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #CCCCCC;
+}
+
+button {
+    background-color: #FF4081;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #E60073;
+    transform: scale(1.05);
+}
+
+canvas {
+    border: 4px solid #FFD700;
+    display: block;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
+}
+
+#colorPercentages, #winnerDisplay {
+    font-size: 20px;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 /* Style pour la fenêtre modale */
 .modal {
-    display: none;
     position: fixed;
-    z-index: 1;
-    padding-top: 60px;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    background-color: #fefefe;
-    color: #000;
+    background: #2C2C3A;
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0px 5px 15px rgba(255, 215, 0, 0.5);
 }
 
-.close, .closeWinner, .prev, .next {
+.close, .closeWinner {
     position: absolute;
     top: 10px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    user-select: none;
+    right: 15px;
+    font-size: 35px;
+    color: #FFD700;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
-.close {
-    right: 35px;
-}
-
-.closeWinner {
-    right: 10px;
-    top: 10px;
-}
-
-.prev {
-    left: 15px;
-}
-
-.next {
-    right: 75px;
-}
-
-.close:hover,
-.closeWinner:hover,
-.prev:hover,
-.next:hover {
-    color: #bbb;
+.close:hover, .closeWinner:hover {
+    color: #FF4081;
 }
 
 #winnerTitle {
     font-size: 24px;
     margin-bottom: 10px;
+    color: #FFD700;
 }
 
 #winnerText {
@@ -96,21 +104,47 @@ video {
     margin-bottom: 20px;
 }
 
-#winnerScores {
+#winnerScores div {
     font-size: 16px;
+    margin-top: 5px;
+    padding: 5px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 6px;
 }
 
 #restartGameButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #FFD700;
+    color: #222;
+    font-weight: bold;
 }
 
 #restartGameButton:hover {
-    background-color: #0056b3;
+    background-color: #E6C300;
+}
+
+
+#winnerModal {
+    display: none;
+}
+
+#modal {
+    display: none;
+}
+
+
+#countdownOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    color: #FFD700;
+    font-weight: bold;
+    text-shadow: 5px 5px 15px rgba(255, 215, 0, 0.8);
+    z-index: 9999;
 }

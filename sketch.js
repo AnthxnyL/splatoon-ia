@@ -13,7 +13,8 @@ let nextButton = document.getElementById('nextButton');
 let currentIndex = 0;
 let images = [];
 let timer;
-let timeLeft = 15; // Temps en secondes
+let timeLeft = 15; // Temps en secondes pour la partie
+let countdown = 5; // Temps en secondes pour le décompte avant le début de la partie
 let winnerDisplay = document.getElementById('winnerDisplay'); // Conteneur pour afficher le gagnant
 let timerDisplay = document.getElementById('timer'); // Conteneur pour afficher le minuteur
 let winnerModal = document.getElementById('winnerModal'); // Fenêtre modale pour afficher le gagnant
@@ -68,8 +69,8 @@ function setup() {
         changeImage(1);
     }
 
-    // Démarrer le minuteur
-    startTimer();
+    // Démarrer le décompte avant de commencer le minuteur
+    startCountdown();
 }
 
 function gotHands(results) {
@@ -156,6 +157,29 @@ function updateColorPercentages() {
     }
 }
 
+function startCountdown() {
+    let countdownOverlay = document.createElement('div');
+    countdownOverlay.id = 'countdownOverlay';
+    countdownOverlay.innerHTML = `<div id="countdownText">${countdown}</div>`;
+    document.body.appendChild(countdownOverlay);
+
+    let countdownText = document.getElementById('countdownText');
+
+    let countdownTimer = setInterval(() => {
+        countdown--;
+        countdownText.innerText = countdown;
+        
+        if (countdown <= 0) {
+            clearInterval(countdownTimer);
+            document.body.removeChild(countdownOverlay);
+            startTimer(); // Démarrer le minuteur de la partie
+            clearDrawing();
+        }
+    }, 1000);
+}
+
+
+
 function startTimer() {
     timeLeft = 15; // 15 secondes
     timer = setInterval(() => {
@@ -202,8 +226,9 @@ function determineWinner() {
 }
 
 function restartGame() {
-    clearInterval(timer); // Arrêter le minuteur actuel
-    startTimer(); // Redémarrer le minuteur
+    clearInterval(timer);
+    countdown = 5;
+    startCountdown();
     clearDrawing(); // Effacer le dessin
     winnerModal.style.display = 'none'; // Fermer la fenêtre modale du gagnant
 }
